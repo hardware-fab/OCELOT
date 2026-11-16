@@ -1,0 +1,245 @@
+{
+    "layers": {
+        "NWELL": {
+            "Type": "Nwell",
+            "LayerID": 64,
+            "LayerType": {"Draw": 20}
+        },
+        "TAP": {
+            "Type": "Tap",
+            "LayerID": 65,
+            "LayerType": {"Draw": 44}
+        },
+        "DIFF": {
+            "Type": "Diffusion",
+            "LayerID": 65,
+            "LayerType": {"Draw": 20}
+        },
+        "POLY": {
+            "Type": "Conductor",
+            "LayerID": 66,
+            "LayerType": {"Draw": 20, "Resistor": 13},
+            "Width": 150,
+            "Space": 210,
+            "Pitch": 360,
+            "MinLength": 200,
+            "EndToEnd": 200
+        },
+        "LI_contact":{
+            "Type": "Via",
+            "Layer": "LI_contact",
+            "LayerID": 66,
+            "LayerType": {"Draw": 44},
+            "Layers": ["LI", "M1"],
+            "SpaceX": 180,
+            "SpaceY": 180,
+            "WidthX": 180,
+            "WidthY": 180,
+            "ViaEnclosureLowerX": 50,
+            "ViaEnclosureUpperX": 110,
+            "ViaEnclosureLowerY": 50,
+            "ViaEnclosureUpperY": 50
+        },
+        "LI": {
+            "Type": "Conductor",
+            "LayerID": 67,
+            "LayerType": {"Draw": 20},
+            "Width": 170,
+            "Space": 170,
+            "Pitch": 340,
+            "MinLength": 340,
+            "EndToEnd": 170        
+        },
+        "V0": {
+            "Type": "Via",
+            "Layer": "V0",
+            "LayerID": 67,
+            "LayerType": {"Draw": 44},
+            "Layers": ["LI", "M1"],
+            "SpaceX": 180,
+            "SpaceY": 180,
+            "WidthX": 180,
+            "WidthY": 180,
+            "ViaEnclosureLowerX": 50,
+            "ViaEnclosureUpperX": 110,
+            "ViaEnclosureLowerY": 50,
+            "ViaEnclosureUpperY": 50
+        },
+        "M1": {
+            "Type": "Metal",
+            "LayerID": 68,
+            "LayerType": {"Draw":20, "Label":5},
+            "Direction": "H",
+            "Pitch": 560,
+            "Width": 280,
+            "MinL": 280,
+            "EndToEnd": 280,
+            "Offset": 0
+        },
+        "V1": {
+            "Type": "Routing_via",
+            "Layer": "V1",
+            "LayerID": 68,
+            "LayerType": {"Draw":44}, 
+            "Layers": ["M1", "M2"],
+            "SpaceX": 180,
+            "SpaceY": 180,
+            "WidthX": 180,
+            "WidthY": 180,
+            "ViaEnclosureLowerX": 50,
+            "ViaEnclosureUpperX": 110,
+            "ViaEnclosureLowerY": 50,
+            "ViaEnclosureUpperY": 50
+        },
+        "M2": {
+            "Type": "Metal",
+            "LayerID": 69,
+            "LayerType": {"Draw":20, "Label":5},
+            "Direction": "V",
+            "Pitch": 560,
+            "Width": 400,
+            "MinL": 280,
+            "EndToEnd": 280,
+            "Offset": 0
+        },
+        "V2": {
+            "Type": "Routing_via",
+            "Layer": "V2",
+            "LayerID": 69,
+            "LayerType": {"Draw":44}, 
+            "Layers": ["M2", "M3"],
+            "SpaceX": 200,
+            "SpaceY": 200,
+            "WidthX": 200,
+            "WidthY": 200,
+            "ViaEnclosureLowerX": 100,
+            "ViaEnclosureUpperX": 100,
+            "ViaEnclosureLowerY": 100,
+            "ViaEnclosureUpperY": 100
+        },
+        "M3": {
+            "Type": "Metal",
+            "LayerID": 70,
+            "LayerType": {"Draw":20, "Label":5},
+            "Direction": "H",
+            "Pitch": 560,
+            "Width": 400,
+            "MinL": 280,
+            "EndToEnd": 280,
+            "Offset": 0
+        },
+        "V3": {
+            "Type": "Routing_via",
+            "Layer": "V3",
+            "LayerID": 70,
+            "LayerType": {"Draw":44},
+            "Layers": ["M3", "M4"],
+            "SpaceX": 300,
+            "SpaceY": 300,
+            "WidthX": 300,
+            "WidthY": 300,
+            "ViaEnclosureLowerX": 50,
+            "ViaEnclosureUpperX": 150,
+            "ViaEnclosureLowerY": 150,
+            "ViaEnclosureUpperY": 150
+        },
+        "M4": {
+            "Type": "Metal",
+            "LayerID": 71,
+            "LayerType": {"Draw":20, "Label":5},
+            "Direction": "V",
+            "Pitch": 560,
+            "Width": 600,
+            "MinL": 280,
+            "EndToEnd": 280,
+            "Offset": 0
+        },
+        "V4": {
+            "Type": "Routing_via",
+            "Layer": "V4",
+            "LayerID": 71,
+            "LayerType": {"Draw":44}, 
+            "Layers": ["M4", "M5"],
+            "SpaceX": 330,
+            "SpaceY": 330,
+            "WidthX": 330,
+            "WidthY": 330,
+            "ViaEnclosureLowerX": 200,
+            "ViaEnclosureUpperX": 200,
+            "ViaEnclosureLowerY": 200,
+            "ViaEnclosureUpperY": 200
+        },        
+        "M5": {
+            "Type": "Metal",
+            "LayerID": 72,
+            "LayerType": {"Draw":20, "Label":5},
+            "Direction": "H",
+            "Pitch": 1120,
+            "Width": 800,
+            "MinL": 560,
+            "EndToEnd": 560,
+            "Offset": 0
+        },
+        "URPM": {
+            "Type": "Resistor Sheet",
+            "LayerID": 79,
+            "LayerType": {"Draw": 20}
+        },
+        "CAPM": {
+            "Type": "Capacitor Sheet",
+            "LayerID": 89,
+            "LayerType": {"Draw": 44}
+        },
+        "CAP2M": {
+            "Type": "Capacitor Sheet 2",
+            "LayerID": 97,
+            "LayerType": {"Draw": 44}
+        },
+        "NMASK": {
+            "Type": "Mask",
+            "LayerID": 93,
+            "LayerType": {"Draw": 44}
+        },
+        "PMASK": {
+            "Type": "Mask",
+            "LayerID": 94,
+            "LayerType": {"Draw": 20}
+        },
+        "NPC": {
+            "Type": "Mask",
+            "LayerID": 95,
+            "LayerType": {"Draw": 20}
+        },
+        "LVT": {
+            "Layer": "LVT",
+            "LayerID": 125,
+            "LayerType": {"Draw": 44}
+        },
+        "BOUNDARY": {
+            "Layer": "Boundary",
+            "LayerID": 235,
+            "LayerType": {"Draw": 4, "Blockage": 0}
+        }
+    },
+    "drawing": {
+        "pin_size_multipliers": [1],
+        "pin_distance_multipliers": [1]
+    },
+    "placement": {
+        "grid_multipliers": [2, 1]
+    },
+    "routing": {
+        "grid_multipliers": [2, 1],
+        "bottom_routing_layer": 0,
+        "top_routing_layer": 3,
+        "max_top_routing_layer": 3
+    },
+    "metals_map":
+    {
+        "68": "M1",
+        "69": "M2",
+        "70": "M3",
+        "71": "M4",
+        "72": "M5"
+    }
+}
