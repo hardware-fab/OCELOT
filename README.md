@@ -10,7 +10,7 @@ Set the `PDK_ROOT` environment variable to the path of your PDK installation, su
 
 ```bash
 export PDK_ROOT=/usr/local/share/pdk/sky130A
-./ocelot-linux-x86_64/OCELOT ./examples/circuits/<circuit-name> ./examples/pdks/skywater_130.json
+./OCELOT ./examples/circuits/<circuit-name> ./examples/pdks/skywater_130.json
 ```
 
 Replace `<circuit-name>` with the name of the circuit you want to process.
