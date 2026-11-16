@@ -1,6 +1,0 @@
-#!/bin/bash
-set -e
-runtime=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)
-export CAD_ROOT="$runtime/lib"
-export TCL_LIBRARY="$runtime/lib/tcl8.6"
-exec "$runtime/bin/tclsh" "$CAD_ROOT/magic/batch.tcl" "$@"
