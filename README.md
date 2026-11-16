@@ -1,10 +1,16 @@
 # OCELOT
 
-This repository contains the implementation accompanying the paper **“OCELOT: Analog Electronic Design Automation through RL-based Layout Design and Optimization”**, awaiting for approval in the *IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems*.
+This repository contains the implementation accompanying the paper **“OCELOT: Analog Electronic Design Automation through RL-based Layout Design and Optimization”**, currently under review at *IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems*.
 
-# Usage
+## Setup
 
-Install the SkyWater SKY130 PDK by following the instructions in the [official repository](https://github.com/google/skywater-pdk).
+Install the following dependencies using the instructions provided in their official repositories:
+
+- [SkyWater SKY130 PDK](https://github.com/google/skywater-pdk)
+- [Magic](https://github.com/rtimothyedwards/magic)
+- [Netgen](https://github.com/rtimothyedwards/netgen)
+
+## Usage
 
 Set the `PDK_ROOT` environment variable to the path of your PDK installation, such as `/usr/local/share/pdk/sky130A`, then run OCELOT with the desired circuit and PDK configuration:
 
