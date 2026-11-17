@@ -1,0 +1,8 @@
+# Relative paths are resolved against this file's directory.
+ocelot_root: ..
+# Set this to the installed SKY130A directory containing libs.tech/.
+pdk_root: /path/to/sky130A
+device: cpu
+torch_threads: 2
+ngspice_processes: 3
+layout_timeout_seconds: 3600

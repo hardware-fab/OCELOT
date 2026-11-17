@@ -1,0 +1,72 @@
+.lib "@PDK_LIB@" tt
+.temp 27
+
+* Pre-layout subcircuit — miller_ota
+.subckt miller_ota INM INP GND VDD OUT VBIAS
+    XM0  net10 INM   net11 GND  sky130_fd_pr__nfet_01v8 l=1.5e-07  w=5e-06  nf=1
+    XM2  out1  INP   net11 GND  sky130_fd_pr__nfet_01v8 l=1.5e-07  w=5e-06  nf=1
+    XM1  net11 VBIAS GND   GND  sky130_fd_pr__nfet_01v8 l=1.5e-07  w=3e-06  nf=1
+    XM10 VBIAS VBIAS GND   GND  sky130_fd_pr__nfet_01v8 l=1.5e-07 w=3e-06 nf=1
+    XM4  net10 net10 VDD   VDD  sky130_fd_pr__pfet_01v8 l=1.5e-07  w=1.5e-05  nf=1
+    XM3  out1  net10 VDD   VDD  sky130_fd_pr__pfet_01v8 l=1.5e-07  w=1.5e-05  nf=1
+    XM5  OUT   out1  VDD   VDD  sky130_fd_pr__pfet_01v8 l=1.5e-07  w=6e-05  nf=1
+    XM6  OUT   VBIAS GND   GND  sky130_fd_pr__nfet_01v8 l=1.5e-07  w=1.5e-05  nf=1
+    XR0  out1  net12 GND         sky130_fd_pr__res_xhigh_po_5p73 r=2500
+    XC0  net12 OUT               sky130_fd_pr__cap_mim_m3_1 l=20e-6 w=20e-6
+.ends miller_ota
+
+* ── Instance 1: Open-Loop (For gain reference) ───────────────────────────────────
+xota_ol vinn_ol vin_ol GND VDD VOUT_OL vbias_ol miller_ota
+Vpos_ol  vin_ol    GND  dc 0.9           $ DC bias for non-inverting
+L_break  VOUT_OL   vinn_ol  1GH          $ DC short for biasing, AC open for gain
+C_inject IN_AC     vinn_ol  1GF          $ Injection cap
+Vin_AC   IN_AC     GND      dc 0.9 ac 1  $ AC signal source for OLG
+
+* ── Instance 2: Closed-Loop Unity Gain (For CMRR, PSRR) ──────────────────────────
+xota_cl VOUT_CL vin_cl GND VDD VOUT_CL vbias_ol miller_ota
+Vcl_in   vin_cl    GND  dc 0.9 ac 1      $ Input for common-mode injection
+
+* ── Global Supplies and Biasing ──────────────────────────────────────────────────
+Vcc      VDD       GND      dc 1.8   $ Main supply
+Vbias    vbias_ol  GND      dc 0.5     $ Tail current bias
+
+.ac dec 100 1 1G
+
+.control
+    * ====== 1. Gain reference for CMRR/PSRR (Measured on Instance 1) ======
+    alter @Vin_AC[acmag] = 1
+    alter @Vcl_in[acmag] = 0
+    alter @Vcc[acmag]    = 0
+    run
+
+    let gain_vec = vdb(VOUT_OL) - vdb(vinn_ol)
+    
+    meas ac dc_gain MAX gain_vec
+    
+
+
+    * ====== 2. CMRR (Measured on Instance 2) ======
+    alter @Vin_AC[acmag] = 0
+    alter @Vcl_in[acmag] = 1
+    alter @Vcc[acmag]    = 0
+    run
+    
+    meas ac cm_out_db MAX vdb(VOUT_CL)
+    let cmrr_val = ac1.dc_gain - $&cm_out_db
+    set cmrr_num = "$&cmrr_val"
+
+    * ====== 3. PSRR (Measured on Instance 2) ======
+    alter @Vin_AC[acmag] = 0
+    alter @Vcl_in[acmag] = 0
+    alter @Vcc[acmag]    = 1
+    run
+    
+    meas ac psrr_out_db MAX vdb(VOUT_CL)
+    let psrr_final = ac1.dc_gain - $&psrr_out_db
+    set psrr_num = "$&psrr_final"
+
+    * ====== 4. Write scalar metrics ======
+    echo "cmrr_dB = $cmrr_num"      > @METRICS_PATH@
+    echo "psrr_dB = $psrr_num"      >> @METRICS_PATH@
+    quit
+.endc

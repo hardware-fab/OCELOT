@@ -1,0 +1,38 @@
+topology: miller_ota
+metric_combo: OTA-B
+local_settings: ../settings.yaml
+output_dir: ../results/miller_ota_B
+area:
+  target_margin: 0.05
+  maximum_margin: 0.10
+training:
+  seed: 42
+  episodes: 1000
+  horizon: 25
+  parallel_episodes: 3
+  checkpoint_interval: 10
+  batch_size: 64
+  replay_capacity: 50000
+  learning_starts: 80
+  train_every: 40
+  updates_per_event: 4
+  gamma: 0.99
+  lr_start: 0.0001
+  lr_end: 0.00001
+  lr_decay_episodes: 600
+  entropy_coefficient: 0.01
+  epsilon_start: 1.0
+  epsilon_end: 0.1
+  epsilon_decay_episodes: 500
+  early_stop:
+    window: 200
+    target: 0.8
+    degrade_thresh: 0.12
+    degrade_patience: 300
+    loss_alarm_window: 100
+    loss_alarm_factor: 8.0
+    loss_lr_reduction: 0.3
+    loss_alarm_cooldown: 200
+evaluation:
+  episodes: 30
+  seed: 43
